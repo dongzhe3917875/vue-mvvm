@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="id"></div>
+</body>
+<script type="text/javascript">
+	var obj = {a : 1, b: 2}
+	var objj = {}
+	Object.defineProperty(objj, 'combine', {
+		get () {
+			console.log('get')
+			return obj.a + obj.b
+		}
+	})
+</script>
+</html>
