@@ -21,7 +21,17 @@ function Watcher(vm, expOrFn, cb) {
     return vm[expOrFn]
   }
   this.setter = function (vm, value) {
-    vm[expOrFn] = value
+    var val = vm;
+    var exp = this.expOrFn
+    exp = exp.split('.');
+    exp.forEach(function(k, i) {
+        // 非最后一个key，更新val的值
+        if (i < exp.length - 1) {
+            val = val[k];
+        } else {
+            val[k] = value;
+        }
+    })
   }
 
   if (typeof expOrFn === 'function') {

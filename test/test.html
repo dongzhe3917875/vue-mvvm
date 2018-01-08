@@ -10,6 +10,7 @@
 		<p>Your name: {{name}}</p>
 		<!-- <ul><li><a href=""></a></li><li><a href=""></a></li><li><a href=""></a></li></ul> -->
 		<p>{{aaa}}</p>
+		<p v-text='obj.name'></p>
 		<button v-on:click='changeName'>age to 18</button>
 	</div>
 	<script src="../dist/vue.js"></script>
@@ -17,8 +18,9 @@
 		var vm = new Vue({
 			el: '#box',
 			data: {
-				name: 'luobo',
-				age: '12'
+				name: 'dongzhe',
+				age: '12',
+				obj: {name: 'dongzhe'}
 			},
 			computed: {
 				aaa () {
@@ -28,7 +30,15 @@
 			methods: {
 				changeName () {
 					this.age = 18
+					this.obj.name = 'heheda'
+				},
+				test () {
+					console.log('yes it is mounted')
 				}
+			},
+			mounted () {
+				this.obj = {name: 'dongzhe nb'}
+				this.test()
 			}
 		})
 	</script>

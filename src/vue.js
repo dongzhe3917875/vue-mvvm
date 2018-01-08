@@ -17,7 +17,11 @@ Vue.prototype._init = function(options) {
   this._watchers = []
 
   this._isVue = true
+
+  this.mounted = options.mounted || function() {}
+
   this._initState()
+  
     // 挂载 
   this.$mount(options.el)
 }
@@ -25,6 +29,18 @@ Vue.prototype._init = function(options) {
 Vue.prototype._initState = function() {
   this._initProp()
   this._initData()
+  this._initMethods()
+}
+
+
+Vue.prototype._initMethods = function() {
+  var methods = this._methods = this.$options.methods || {}
+  // 把data的属性赋值给this 将data.name 赋值给 this.name 浅复制
+  Object.keys(this._methods).forEach(function(key) {
+      // 对数据进行代理
+      this[key] = this._methods[key]
+    }, this)
+    // 对数据进行监听
 }
 
 Vue.prototype._initProp = function() {
@@ -94,6 +110,7 @@ Vue.prototype._compile = function (el) {
   var original = el
   compileRoot(el)(this, el)
   compile(el)(this, el)
+  this.mounted()
 }
 
 // 指令部分

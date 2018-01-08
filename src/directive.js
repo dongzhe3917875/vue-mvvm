@@ -14,6 +14,8 @@ Directive.prototype._bind = function () {
 	var name = this.name
 	var descriptor = this.descriptor
 
+
+	// 绑定事件
 	if (name.indexOf('on') === 0) {
 		return this.onMethod(this.el, this.vm, this.expression, name)
 	}
@@ -26,6 +28,7 @@ Directive.prototype._bind = function () {
 	this.update = def.update
 	this.bind = def.bind
 
+	// 绑定指令的事件
 	if (this.bind) this.bind()
 
 	this._update = function (val) {
@@ -36,7 +39,8 @@ Directive.prototype._bind = function () {
 	// 初始化一个watcher
 	// watcher去更新数据
 	var watcher = this._watcher = new Watcher(this.vm, this.expression, this._update)
-	// 这里是更新dom
+
+	//初始化更新视图
 	this.update(watcher.value)
 }
 

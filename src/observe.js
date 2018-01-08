@@ -23,7 +23,7 @@ module.exports = function observe(value, vm) {
 
 function Observer(value) {
   this.value = value
-  this.dep = new Dep()
+  // this.dep = new Dep()
   // 把observer对象设置为 this._data的一个属性 __ob__
   Object.defineProperty(value, '__ob__', {
     value: this,
@@ -58,8 +58,11 @@ Observer.prototype.addVm = function (vm) {
 function defineReactive(obj, key, value) {
   // obj 就是 this._data {name: dongzhe}
   var dep = new Dep()
-  // 定义set 和 get
 
+  // 如果value是一个对象 则进行递归遍历 确保每一个属性被defineProperty到
+  observeNew(value); // 监听子属性
+
+   // 定义set 和 get
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
@@ -80,14 +83,14 @@ function defineReactive(obj, key, value) {
         // 一旦有数据被set 就会更新依赖数据
 
         // 新的值是object的话，进行监听
-        childObj = observe(newVal)
+        childObj = observeNew(newVal)
         dep.notify()
       }
     }
   })
 }
 
-function observe(value, vm) {
+function observeNew(value, vm) {
     if (!value || typeof value !== 'object') {
         return
     }
