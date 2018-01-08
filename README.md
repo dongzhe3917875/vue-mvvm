@@ -12,7 +12,7 @@
 
 使用demo的方法放在了test.html
 
-```
+```html
 <!doctype html>
 <html>
 <head>
