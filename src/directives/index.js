@@ -18,3 +18,17 @@ exports.text = {
     this.el.textContent = value
   }
 }
+
+
+exports.show = {
+  bind: function () {
+    // do nothing
+  },
+  update: function (value) {
+    if (value === true) {
+      this.el.style.display = 'block'
+    } else {
+      this.el.style.display = 'none'
+    }
+  }
+}

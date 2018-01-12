@@ -35,12 +35,9 @@ Vue.prototype._initState = function() {
 
 Vue.prototype._initMethods = function() {
   var methods = this._methods = this.$options.methods || {}
-  // 把data的属性赋值给this 将data.name 赋值给 this.name 浅复制
   Object.keys(this._methods).forEach(function(key) {
-      // 对数据进行代理
       this[key] = this._methods[key]
     }, this)
-    // 对数据进行监听
 }
 
 Vue.prototype._initProp = function() {

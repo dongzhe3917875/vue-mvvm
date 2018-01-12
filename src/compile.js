@@ -154,6 +154,10 @@ var isDirective = function(attr) {
 	return attr.indexOf('v-') == 0
 }
 
+var isBindDirective = function (dir) {
+	return dir.indexOf('bind') === 0
+}
+
 function compileTextNode(node, options) {
 	var tokens = parseText(node.wholeText)
 	// console.log("%c解析文本节点tokens: " + '%c' + JSON.stringify(tokens), 'color:#f90;font-size:16px', 'font-size:16px;color:#fce')

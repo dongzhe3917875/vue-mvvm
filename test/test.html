@@ -12,6 +12,8 @@
 		<p>{{aaa}}</p>
 		<p v-text='obj.name'></p>
 		<button v-on:click='changeName'>age to 18</button>
+		<p v-show='showMe'>show me</p>
+		<button v-on:click='hideUp'>toggleMe</button>
 	</div>
 	<script src="../dist/vue.js"></script>
 	<script>
@@ -20,7 +22,8 @@
 			data: {
 				name: 'dongzhe',
 				age: '12',
-				obj: {name: 'dongzhe'}
+				obj: {name: 'dongzhe'},
+				showMe: true
 			},
 			computed: {
 				aaa () {
@@ -34,6 +37,9 @@
 				},
 				test () {
 					console.log('yes it is mounted')
+				},
+				hideUp () {
+					this.showMe = !this.showMe
 				}
 			},
 			mounted () {

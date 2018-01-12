@@ -19,7 +19,6 @@ Directive.prototype._bind = function () {
 	if (name.indexOf('on') === 0) {
 		return this.onMethod(this.el, this.vm, this.expression, name)
 	}
-
 	if (this.el && this.el.removeAttribute) {
 		this.el.removeAttribute(descriptor.attr || 'v-' + name)
 	}

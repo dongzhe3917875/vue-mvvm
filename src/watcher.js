@@ -22,7 +22,7 @@ function Watcher(vm, expOrFn, cb) {
   }
   this.setter = function (vm, value) {
     var val = vm;
-    var exp = this.expOrFn
+    var exp = expOrFn
     exp = exp.split('.');
     exp.forEach(function(k, i) {
         // 非最后一个key，更新val的值
@@ -34,6 +34,7 @@ function Watcher(vm, expOrFn, cb) {
     })
   }
 
+  // getter的作用域是this.vm
   if (typeof expOrFn === 'function') {
       this.getter = expOrFn;
   } else {
